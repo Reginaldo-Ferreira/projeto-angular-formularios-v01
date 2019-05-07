@@ -1,0 +1,189 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+
+  <div class="form-group row"><!-- tags de input In 'Nome'-->
+    <div class="col-sm-12">
+      <!-- tag div para alinhamento da label -->
+      <label for="nome">Nome</label>
+    </div>
+    <div class="col-sm-12">
+      <input #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" required type="text" class="form-control" id="nome"
+        aria-describedby="nomeHelp" placeholder="Entre com nome" [(ngModel)]="usuario.nome" name="nome">
+      <!--  <small id="nomeHelp" class="form-text text-muted">Entre com o nome</small><div>{{nome.className}}</div> -->
+      <div *ngIf="!nome.valid && nome.touched" class="alertErro" [ngClass]="{
+        'animated bounceIn delay-2s': !nome.valid }" ><!-- class="alert alert-danger"   role="alert"-->
+        <!--class="invalid-tooltip"   -->
+        Nome é obrigatório
+      </div>
+    </div>
+   
+  </div>
+ 
+
+  
+  <div class="form-group row"><!-- tags de input In 'endereço de emails'-->
+    <!--                ------------------------formulario EMAIL 1------------------------------------ -->
+    <div class="col-md-8">
+      <!-- <div class="col-sm-12"> -->
+        <!-- tag div para alinhamento da label -->
+        <label for="Email1">Endereço de Email</label>
+     <!--  </div> -->
+      <!-- <div class="col-md-12"> -->
+        <div class="input-group">
+          <!-- essa div é necessária para o uso do 'invalid-tooltip ' -->
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-info text-white">@</span>
+          </div>
+          <div [class.play]="email.valid" [class.shapeshifter]="email.valid" class="posicao_svg_block"></div>
+          <input #email="ngModel" required email 
+          [ngClass]="aplicaCssErro(email)"
+
+            type="email" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="nome@Email.com" [(ngModel)]="usuario.email"
+            name="email">
+            
+          <!--  <small id="emailHelp" class="form-text text-muted">coloque o seu email</small> -->
+          <div class="invalid-tooltip invalid-feedback " [ngClass]="{
+                    'animated bounceIn delay-2s': !email.valid
+                }">
+            <!-- infinite -->
+            Por favor insira um email válido!!
+          </div>
+
+<!--           <div class="valid-feedback">
+                  <span class="material-icons svgTesteAni">done</span>Looks good!
+          </div> -->
+        </div>
+     <!--  </div> -->
+    </div>
+    <!--                ------------------------ EMAIL 2------------------------------------ -->
+    <div class="col-md-4">
+      <div class="input-group">
+          <label for="validationTooltipUsername">Email2</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+            </div>
+            <div [class.play]="email2.valid" [class.shapeshifter]="email2.valid" class="posicao_svg_block"></div>
+              <input #email2="ngModel" required email type="email" name="email2" class="form-control" id="validationTooltipUsername" placeholder="Email2"
+                aria-describedby="validationTooltipUsernamePrepend" [(ngModel)]="usuario.email2" [class.is-invalid]="!email2.valid && email2.touched">
+              
+              <div class="invalid-tooltip invalid-feedback ">
+                Por favor digite um email válido!.
+              </div>
+<!--               <div class="valid-feedback">
+                Looks good!
+              </div> -->
+           
+          </div>
+      </div>
+
+    </div>
+  </div>
+ 
+  <!--                ------------------------formulario PASSWORD------------------------------------ -->
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="senha">Password</label>
+    </div>
+    <div class="col-sm-12">
+      <div class="input-group">
+        <input #variavelSenha="ngModel" required [class.is-invalid]="!variavelSenha.valid && variavelSenha.touched" type="password" class="form-control" id="senha" placeholder="Password" [(ngModel)]="usuario.senha"
+          name="senha">
+        <div class="invalid-tooltip invalid-feedback " [ngClass]="{
+          'animated bounceIn delay-2s': !variavelSenha.valid
+      }">
+          Atenção: Senha é necessária!
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!--                ------------------------formulario endereço------------------------------------ -->
+  <div class="form-group row">
+    <div class="col-md-3 mb-3">
+      <label for="cep">CEP</label>
+
+    
+        <input [class.is-invalid]="!cep.valid && cep.touched" [class.is-valid]="cep.valid" #cep="ngModel" ngModel type="text" name="cep"
+          class="form-control" id="cep" placeholder="CEP" required>
+        <div  [class.play]="cep.valid" [class.shapeshifter]="cep.valid" class="posicao_svg_line"></div>
+        <div class="invalid-tooltip invalid-feedback " [ngClass]="{
+          'animated fadeInUp delay-2s': !cep.valid
+      }">
+      CEP é obrigatório.
+    </div>
+
+
+    </div>
+    <div class="col-md-3 mb-3">
+        <label for="numero">Número</label>
+        <input [class.is-invalid]="!numero.valid && numero.touched" [class.is-valid]="numero.valid" #numero="ngModel" ngModel type="text" name="numero" class="form-control" id="numero" placeholder="numero" required>
+        <div class="invalid-tooltip invalid-feedback "[ngClass]="{
+          'animated bounceIn delay-2s': !numero.valid
+      }">
+            Número é obrigatório.
+        </div>
+      </div>
+      <div class="col-md-6 mb-6">
+          <label for="complemento">Complemento</label>
+          <input  #complemento="ngModel" ngModel type="text" name="complemento" class="form-control" id="complemento" placeholder="complemento" >
+
+        </div>
+       <!--  Tags Ruas--------------------------------------------- -->
+        <div class="col-md-12 mb-12">
+            <label for="rua">Rua</label>
+           <!-- readonly --> <input [class.is-invalid]="!rua.valid && rua.touched" [class.is-valid]="rua.valid" #rua="ngModel" ngModel type="text" name="rua" class="form-control" id="rua" placeholder="rua" required>
+            <div class="invalid-tooltip invalid-feedback "[ngClass]="{
+              'animated bounceIn delay-2s': !rua.valid
+          }">
+                Rua é obrigatório.
+            </div>
+          </div>
+
+  </div>
+
+<div class="form-group row">
+    <div class="col-md-5 col-mb-5">
+        <label for="bairro">Bairro</label>
+        <input [class.is-invalid]="!bairro.valid && bairro.touched" [class.is-valid]="bairro.valid" #bairro="ngModel" ngModel type="text" name="bairro" class="form-control" id="bairro" placeholder="bairro" required>
+        <div class="invalid-tooltip invalid-feedback "[ngClass]="{
+          'animated fadeInUp delay-2s': !bairro.valid
+      }">
+            Bairro é obrigatório.
+        </div>
+      </div>
+      <div class="col-md-4 col-mb-4">
+          <label for="cidade">Cidade</label>
+          <input [class.is-invalid]="!cidade.valid && cidade.touched" [class.is-valid]="cidade.valid" #cidade="ngModel" ngModel type="text" name="cidade" class="form-control" id="cidade" placeholder="cidade" required>
+          <div class="invalid-tooltip invalid-feedback "[ngClass]="{
+            'animated fadeInUp delay-2s': !cidade.valid
+        }">
+              Cidade é obrigatório.
+          </div>
+        </div>
+        <div class="col-md-3 col-mb-3">
+            <label for="estado">Estado</label>
+            <input [class.is-invalid]="!estado.valid && estado.touched" [class.is-valid]="estado.valid" #estado="ngModel" ngModel type="text" name="estado" class="form-control" id="estado" placeholder="estado" required>
+            <div class="invalid-tooltip invalid-feedback "[ngClass]="{
+              'animated fadeInUp delay-2s': !estado.valid
+          }">
+                Estado é obrigatório.
+            </div>
+          </div>
+
+</div>
+  <!--                ------------------------ check box------------------------------------ -->
+  <div class="form-group form-check row ">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="usuario.guarda_dados" name="salva">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+
+  <button disabled [disabled]="!form.valid" type="submit" class="btn btn-primary">Submit</button>
+  <app-form-debug [form]="form"></app-form-debug>
+</form>
+
+<svg class="svg-24px" id="checkbox-1">
+    <use xlink:href="MaterialIcons.svg#ic_check_box_outline_blank"></use>
+    <use class="check" xlink:href="MaterialIcons.svg#ic_check_box"></use>
+  </svg>
